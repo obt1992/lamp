@@ -121,7 +121,6 @@ function is_valid_format($string, $format){
   return preg_match($format, $string) === 1;
 }
 
-
 function is_valid_upload_image($image){
   if(is_uploaded_file($image['tmp_name']) === false){
     set_error('ファイル形式が不正です。');
@@ -135,3 +134,6 @@ function is_valid_upload_image($image){
   return true;
 }
 
+function h($str){
+  return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
+}
