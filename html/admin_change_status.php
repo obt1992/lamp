@@ -4,6 +4,8 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 //ページへリング
+xss_header();
+
 session_start();
 
 if(is_logined() === false){

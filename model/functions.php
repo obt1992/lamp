@@ -138,7 +138,7 @@ function h($str){
   return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
 }
 
-function header(){
+function xss_header(){
   header('Cache-Control: private,no-store,must-revalidate');
   //Webサーバから返されてくるコンテンツをキャッシュさせないようにさせる
   header('X-Content-Type-Options:nosniff');

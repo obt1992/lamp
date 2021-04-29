@@ -2,6 +2,8 @@
 require_once '../conf/const.php';
 require_once MODEL_PATH . 'functions.php';
 
+xss_header();
+
 session_start();
 $_SESSION = array();
 $params = session_get_cookie_params();
