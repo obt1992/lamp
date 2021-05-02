@@ -98,7 +98,7 @@ function delete_cart($db, $cart_id){
     LIMIT 1
   ";
 
-  return execute_query($db, $sql),[$cart_id];
+  return execute_query($db, $sql,[$cart_id]);
 }
 
 function purchase_carts($db, $carts){
@@ -157,3 +157,28 @@ function validate_cart_purchase($carts){
   return true;
 }
 
+function get_user_order($db,$order_id = 1,$item_id,$order_date){
+  $sql="
+    INSERT INTO 
+      orders(
+        order_id,
+        user_id,
+        order_date
+      )
+      VALUES(?,?,NOW())
+  "
+  return execute_query($db, $sql,[$order_id,$user_id]);
+}
+
+function get_order_details($db,$order_id,$item_id,$amount){
+  $sql="
+    INSERT INTO
+      order_details(
+        order_id,
+        item_id,
+        quantity
+      )
+      VALUES(?,?,?);
+  "
+  return execute_query($db, $sql,[$order_id,$item_id,$amount]);
+}
