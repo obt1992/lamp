@@ -4,6 +4,7 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
+require_once MODEL_PATH . 'order.php';
 
 xss_header();
 
@@ -25,7 +26,16 @@ $carts = get_user_carts($db, $user['user_id']);
 if(purchase_carts($db, $carts) === false){
   set_error('商品が購入できませんでした。');
   redirect_to(CART_URL);
-} 
+}
+// 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
+$db->beginTransaction();
+try{
+  intsert_user_order($db,$user['user_id']);
+  $order_id = $db->lastInsertId();
+
+  
+}
+
 
 $total_price = sum_carts($carts);
 
