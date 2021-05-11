@@ -1,5 +1,4 @@
 <?php
-<?php 
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
@@ -33,3 +32,5 @@ function insert_order_details($db,$order_id,$item_id,$amount,$price){
   "
   return execute_query($db, $sql,[$order_id,$item_id,$amount,$price]);
 }
+
+function insert_order_details($db,$sql);
