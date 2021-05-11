@@ -9,23 +9,15 @@ xss_header();
 
 session_start();
 
-if(is_valid_csrf_token(get_post('csrf_token'))===false){
-  redirect_to(LOGIN_URL);
-}
-
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
 
 $db = get_db_connect();
 $user = get_login_user($db);
+$item_id = get_post('item_id');
+$amount = get_post('amount');
 
-$cart_id = get_post('cart_id');
+intsert_user_order($db,$user['user_id'],$item_id['item_id']){
 
-if(delete_cart($db, $cart_id)){
-  set_message('カートを削除しました。');
-} else {
-  set_error('カートの削除に失敗しました。');
 }
-
-redirect_to(CART_URL);
