@@ -77,5 +77,5 @@ function get_detail($db, $order_id){
     GROUP BY
       order_details.price, oreder_details.amount, orders.order_date, items.name
   ";
-  return fetch_all_query($db, $sql, array($order_id));
+  return execute_query($db, $sql,[$order_id]);
 }

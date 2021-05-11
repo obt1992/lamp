@@ -11,7 +11,6 @@ if(is_valid_csrf_token(get_post('csrf_token'))===false){
   redirect_to(LOGIN_URL);
 }
 
-
 if(is_logined() === true){
   redirect_to(HOME_URL);
 }
