@@ -30,16 +30,16 @@ if(purchase_carts($db, $carts) === false){
 // 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
 $db->beginTransaction();
 try{
-  // 購入履歴へINSERT
+// 購入履歴へINSERT
   intsert_user_order($db,$user['user_id']);
 
   $order_id = $db->lastInsertId();
-
-  // 購入明細にINSERT
+// 購入明細にINSERT
   insert_detail($db, $order_id, $cart['item_id'], $cart['amount'], $cart['price']);   
-  }catch(PDOException $e){
+}catch(PDOException $e){
   $db->rollback();
   throw $e;
+  }
 
 $total_price = sum_carts($carts);
 
