@@ -35,7 +35,7 @@ try{
 
   $order_id = $db->lastInsertId();
 // 購入明細にINSERT
-  insert_detail($db, $order_id, $cart['item_id'], $cart['amount'], $cart['price']);   
+  insert_detail($db, $order_id, $carts['item_id'], $carts['amount'], $carts['price']);   
 }catch(PDOException $e){
   $db->rollback();
   throw $e;
