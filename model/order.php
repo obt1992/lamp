@@ -32,6 +32,13 @@ function insert_details($db,$order_id,$item_id,$amount,$price){
 
 // ユーザ毎の購入履歴
 function get_user_order($db, $user_id){
+  if($user_id===4){
+    $str = "";
+    $param = [];
+  }else{
+    $str = "WHERE user_id = ?";
+    $param = [$user_id];
+  }
   $sql = "
     SELECT
       orders.order_id,
@@ -42,15 +49,14 @@ function get_user_order($db, $user_id){
     JOIN
       order_details
     ON
-      oders.order_id = order_details.order_id
-    WHERE
-      user_id = ?
+      orders.order_id = order_details.order_id
+    {$str}
     GROUP BY
       order_id
     ORDER BY
       order_date desc
   ";
-  return execute_query($db, $sql,[$user_id]);
+  return fetch_all_query($db, $sql,$param);
 }
 
 // ユーザ毎の購入明細

@@ -1,19 +1,21 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
+    <?php include VIEW_PATH . 'templates/head.php'; ?>
     <title>購入履歴</title>
-    <link rel="stylesheet" href="<?php echo h(STYLESHEET_PATH . 'admin.css'); ?>">
+    <link rel="stylesheet" href="<?php echo h(STYLESHEET_PATH . 'index.css'); ?>">
   </head>
 
   <body>
+  <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
     <h1>購入履歴</h1>
 
     <!-- メッセージ・エラーメッセージ -->
     <?php include VIEW_PATH. 'templates/messages.php'; ?>
 
     <!-- 購入履歴 -->
-    <?php if(!empty($order)){ ?>
+    <?php if(!empty($orders)){ ?>
     <table>
       <thead>
         <tr>
@@ -24,15 +26,15 @@
         </tr>
       </thead>
       <tbody>
-      <?php foreach($order) as $order)){ ?>
+      <?php foreach($orders as $order){ ?>
         <tr>
-          <td><?php h print($order)['order_id']); ?></td>
-          <td><?php h print($order)['created']); ?></td>
-          <td><?php h print($order)['total']); ?></td>
+          <td><?php print h($order['order_id']); ?></td>
+          <td><?php print h($order['order_date']); ?></td>
+          <td><?php print h($order['total']); ?></td>
           <td>
             <form method="post" action="detail.php">
               <input type="submit" value="購入明細表示">
-              <input type="hidden" name="order_id" value="<?php h print $order['order_id']); ?>">
+              <input type="hidden" name="order_id" value="<?php print h($order['order_id']); ?>">
               <input type = "hidden" name = "csrf_token" value = "<?php echo $token ?>">
             </form>
           </td>
