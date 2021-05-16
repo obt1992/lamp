@@ -66,22 +66,19 @@ function get_detail($db, $order_id){
       order_details.price,
       order_details.amount,
       orders.order_date,
-      SUM(order_details.price * order_details.amount) AS subtotal,
       items.name
     FROM
       order_details
     JOIN
       items
     ON
-      order_details.item_id = items.item_id
+      order_details.item_id = items.item_id 
     RIGHT JION
       orders
     ON
       order_details.order_id = orders.order_id
     WHERE
       order_id = ?
-    GROUP BY
-      order_details.price, oreder_details.amount, orders.order_date, items.name
   ";
-  return execute_query($db, $sql,[$order_id]);
+  return fetch_all_query($db, $sql,[$order_id]);
 }
