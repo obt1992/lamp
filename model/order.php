@@ -83,3 +83,24 @@ function get_detail($db, $order_id){
   ";
   return fetch_all_query($db, $sql,[$order_id]);
 }
+
+function get_order($db,$order_id){
+  $sql = "
+    SELECT
+      orders.order_id,
+      orders.order_date,
+      orders.user_id,
+      SUM(order_details.price * order_details.amount) AS total
+    FROM
+      orders
+    JOIN
+      order_details
+    ON
+      orders.order_id = order_details.order_id
+    WHERE
+      orders.order_id = ?
+    GROUP BY
+      order_id
+  ";
+  return fetch_query($db, $sql,[$order_id]);
+}

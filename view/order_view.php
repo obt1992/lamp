@@ -16,8 +16,8 @@
 
     <!-- 購入履歴 -->
     <?php if(!empty($orders)){ ?>
-    <table>
-      <thead>
+    <table class="table table-bordered text-center">
+      <thead class="thead-light">
         <tr>
           <th>注文番号</th>
           <th>購入日時</th>
@@ -32,11 +32,11 @@
           <td><?php print h($order['order_date']); ?></td>
           <td><?php print h($order['total']); ?></td>
           <td>
-            <form method="post" action="detail.php">
+            <form method="get" action="detail.php">
               <input type="submit" value="購入明細表示">
               <input type="hidden" name="order_id" value="<?php print h($order['order_id']); ?>">
-              <input type = "hidden" name = "csrf_token" value = "<?php echo $token ?>">
             </form>
+            <a href='detail.php?order_id=<?php print h($order['order_id']); ?>'>購入明細表示</a>
           </td>
         </tr>
       <?php } ?>
