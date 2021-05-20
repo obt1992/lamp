@@ -116,6 +116,10 @@ function purchase_carts($db, $carts){
 
     foreach($carts as $cart){
       insert_details($db, $order_id, $cart['item_id'], $cart['amount'], $cart['price']);
+      //ランキングに商品IDを書き込み
+      insert_ranking($db,$cart['item_id']);
+      //ランキングの商品別購入数を更新
+      update_ranking($db,$cart['item_id'],
       if(update_item_stock(
           $db, 
           $cart['item_id'], 
@@ -125,6 +129,7 @@ function purchase_carts($db, $carts){
       }
     }
     delete_user_carts($db, $carts[0]['user_id']);
+  
     $db->commit();
   }catch(PDOException $e){
     $db->rollback();
@@ -139,10 +144,8 @@ function delete_user_carts($db, $user_id){
     WHERE
       user_id = ?
   ";
-
   execute_query($db, $sql,[$user_id]);
 }
-
 
 function sum_carts($carts){
   $total_price = 0;
