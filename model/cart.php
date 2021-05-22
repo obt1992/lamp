@@ -115,11 +115,6 @@ function purchase_carts($db, $carts){
     $order_id = $db->lastInsertId();
 
     foreach($carts as $cart){
-      insert_details($db, $order_id, $cart['item_id'], $cart['amount'], $cart['price']);
-      //ランキングに商品IDを書き込み
-      insert_ranking($db,$cart['item_id']);
-      //ランキングの商品別購入数を更新
-      update_ranking($db,$cart['item_id'],
       if(update_item_stock(
           $db, 
           $cart['item_id'], 

@@ -32,10 +32,6 @@
           <td><?php print h($order['order_date']); ?></td>
           <td><?php print h($order['total']); ?></td>
           <td>
-            <form method="get" action="detail.php">
-              <input type="submit" value="購入明細表示">
-              <input type="hidden" name="order_id" value="<?php print h($order['order_id']); ?>">
-            </form>
             <a href='detail.php?order_id=<?php print h($order['order_id']); ?>'>購入明細表示</a>
           </td>
         </tr>

@@ -206,3 +206,26 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+//rankingを読み取り
+function get_ranking($db){
+  $sql = "
+      SELECT
+        items.name,
+        items.item_id,
+        items.stock,
+        SUM(order_details.amount) AS amount
+      FROM
+        items
+      JOIN
+        order_details
+      ON
+        items.item_id = order_details.item_id
+      GROUP BY
+        items.item_id
+      ORDER BY
+        amount desc
+      LIMIT 3
+  ";
+  return fetch_all_query($db,$sql);
+}
