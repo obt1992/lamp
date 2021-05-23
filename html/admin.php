@@ -8,6 +8,8 @@ xss_header();
 
 session_start();
 
+$token = get_csrf_token();
+
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
